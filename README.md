@@ -10,7 +10,7 @@ speechrecognition, pyautogui, pyttsx3, wikipedia, gtts, playsound
 ## Features
 
 - Choose user's and assistant's name
-- Time
+- Get current time
 - Open whatever website you want
 - Play music from your mix on YouTube
 - Find restaurants, coffee shops, bars, clubs near you
