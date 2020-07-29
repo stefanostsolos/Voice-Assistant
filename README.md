@@ -3,9 +3,9 @@ Desktop speech assistant that uses speech recognition and Google Text-to-Speech 
 
 ## Requirements
 
-'''
+```
 speechrecognition, pyautogui, pyttsx3, wikipedia, gtts, playsound
-'''
+```
 
 ## Features
 
