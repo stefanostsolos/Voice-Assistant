@@ -127,6 +127,26 @@ def respond(voice_data):
         url = "https://www.google.com/search?q=barber+shop+near+me"
         webbrowser.get().open(url)
 
+    if there_exists(['pet shop', 'pet shops', 'pet shops near me']):
+        url = "https://www.google.com/search?q=pet+shops+near+me"
+        webbrowser.get().open(url)
+
+    if there_exists(['butcher', 'butcher shop']):
+        url = "https://www.google.com/search?q=butchers+near+me"
+        webbrowser.get().open(url)
+
+    if there_exists(['cofee', 'cofee shops']):
+        url = "https://google.com/search?q=coffee+shops+near+me"
+        webbrowser.get().open(url)
+
+    if there_exists(['bars', 'bars near me', 'drinks']):
+        url = "https://www.google.com/search?q=bars+near+me"
+        webbrowser.get().open(url)
+
+    if there_exists(['clubs', 'clubs near me']):
+        url = "https://www.google.com/search?q=clubs+near+me"
+        webbrowser.get().open(url)
+        
     if there_exists(['news', 'latest news', 'news feed', 'top stories']):
         url = "https://news.google.com/"
         webbrowser.get().open(url)
