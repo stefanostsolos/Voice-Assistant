@@ -226,8 +226,21 @@ def respond(voice_data):
         webbrowser.get().open(url)
         engine_speak("You must be somewhere near here, as per Google maps")  
 
-    if there_exists(['open notepad']):
-        os.system('Notepad')
+    def note(voice_data):
+        date = datetime.datetime.now()
+        file_name = str(date).replace(":", "-") + "-note.txt"
+        with open(file_name, "w") as f:
+            f.write(voice_data)
+        subprocess.Popen(["notepad.exe", file_name])
+        #os.system('Notepad')
+
+    NOTE_STRS = ["make a note", "write this down", "remember this", "type this"]
+    for phrase in NOTE_STRS:
+        if phrase in voice_data:
+            engine_speak("What would you like me to write down? ")
+            write_down = record_audio()
+            note(write_down)
+            engine_speak("I've made a note of that.")
     
     if there_exists(['open calculator']):
         os.system('calc')
