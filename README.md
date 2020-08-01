@@ -23,6 +23,6 @@ speechrecognition, pyautogui, pyttsx3, wikipedia, gtts, playsound
 - Find information about a company's stock 
 - Weather information
 - Find a location in Google Maps
-- Open notepad, calculator
+- Open notepad and make a note using your voice, open calculator
 - Open Gmail or launch Outlook
 - Take a screenshot and save it
