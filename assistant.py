@@ -137,7 +137,7 @@ def respond(voice_data):
         url = "https://www.google.com/search?q=butchers+near+me"
         webbrowser.get().open(url)
 
-    if there_exists(['cofee', 'cofee shops']):
+    if there_exists(['coffee', 'coffee shops']):
         url = "https://google.com/search?q=coffee+shops+near+me"
         webbrowser.get().open(url)
 
