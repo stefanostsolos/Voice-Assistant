@@ -6,6 +6,7 @@ import playsound
 import re
 import os
 import sys
+import subprocess
 import random
 import requests
 import pyautogui
