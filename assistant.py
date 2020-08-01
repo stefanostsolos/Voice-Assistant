@@ -1,4 +1,4 @@
-import speech_recognition as sr
+import speech_recognition as sr  # install as speechrecognition
 import webbrowser
 import time
 import datetime
