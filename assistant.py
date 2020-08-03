@@ -41,6 +41,7 @@ def record_audio(ask=''):
     with sr.Microphone() as source:
         if(ask):
             engine_speak(ask)
+        r.adjust_for_ambient_noise(source, duration=0.5)
         audio = r.listen(source, 6, 4)
         voice_data = ''
         try:
