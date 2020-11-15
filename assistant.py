@@ -111,7 +111,7 @@ def respond(voice_data):
             webbrowser.open(url)
     
     if there_exists(['music', 'play music', 'songs']):
-        url = "https://www.youtube.com/watch?v=l0U7SxXHkPY&list=RDMM&start_radio=1"
+        url = "https://www.youtube.com/watch?v=JGwWNGJdvx8&list=PLMC9KNkIncKtPzgY-5rmhvj7fax8fdxoj&list=RDMM&start_radio=1"
         webbrowser.get().open(url)
     
     if there_exists(['restaurants', 'restaurants near me', 'nearby restaurants']):
