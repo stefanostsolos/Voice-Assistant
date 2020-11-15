@@ -1,4 +1,4 @@
-import speech_recognition as sr  # install as speechrecognition
+import speech_recognition as sr
 import webbrowser
 import time
 import datetime
@@ -68,7 +68,7 @@ def respond(voice_data):
         greet = greetings[random.randint(0, len(greetings) - 1)]
         engine_speak(greet)
 
-    if there_exists(["what is your name","what's your name","tell me your name"]):
+    if there_exists(["what is your name", "what's your name", "tell me your name"]):
         if person_obj.name:
             engine_speak(f"my name is {asis_obj.name}")
         else:                                                   
@@ -107,7 +107,7 @@ def respond(voice_data):
         reg_ex = re.search('open website (.+)', voice_data)
         if reg_ex:
             domain = reg_ex.group(1)
-            url = 'https://www.' + domain
+            url = 'https://www.' + domain + '.com'
             webbrowser.open(url)
     
     if there_exists(['music', 'play music', 'songs']):
@@ -122,7 +122,7 @@ def respond(voice_data):
         url = "https://www.google.com/search?q=supermarket+near+me"
         webbrowser.get().open(url)
 
-    if there_exists(['i need a haircut', 'hair salon', 'hair saloon', 'haircut', 'nearby hair salon']):
+    if there_exists(['I need a haircut', 'hair salon', 'hair saloon', 'haircut', 'nearby hair salon']):
         url = "https://www.google.com/search?q=hair+salon+near+me"
         webbrowser.get().open(url)
 
@@ -149,7 +149,7 @@ def respond(voice_data):
     if there_exists(['clubs', 'clubs near me']):
         url = "https://www.google.com/search?q=clubs+near+me"
         webbrowser.get().open(url)
-        
+
     if there_exists(['news', 'latest news', 'news feed', 'top stories']):
         url = "https://news.google.com/"
         webbrowser.get().open(url)
@@ -202,13 +202,13 @@ def respond(voice_data):
    
     if there_exists(["price of"]): 
         search_term = voice_data.split("of")[-1]
-        url = "https://google.com/search?q=" + search_term + "%20stock"
+        url = "https://duckduckgo.com/?q=" + search_term + "+stock&t=ffab&ia=stock"
         webbrowser.get().open(url)
         engine_speak("Here is what I found for" + search_term)
 
     if there_exists(["weather"]):
         search_term = voice_data.split("weather")[-1]
-        url = "https://google.com/search?q=weather"
+        url = "https://duckduckgo.com/?t=ffab&q=weather&ia=weather"
         webbrowser.get().open(url)
         engine_speak("Here is what I found for weather")
     
@@ -224,7 +224,7 @@ def respond(voice_data):
         engine_speak('Here is the location of ' + location)
     
     #Current location from Google maps
-    if there_exists(["what is my exact location", "what's my exact location", "my exact location", "my location", "where am i"]):
+    if there_exists(["What is my exact location", "What's my exact location", "My exact location", "My location", "Where am i"]):
         url = "https://www.google.com/maps/search/Where+am+I+?/"
         webbrowser.get().open(url)
         engine_speak("You must be somewhere near here, as per Google maps")  
@@ -272,16 +272,33 @@ def respond(voice_data):
         myScreenshot.save('C:/Users/user/image' + str(z) + '.png') 
         
     if there_exists(["definition"]): 
+        """
+        # Bs4 method
+
+        definition=record_audio("What do you need the definition of")
+        url=urllib.request.urlopen('https://en.wikipedia.org/wiki/'+definition)
+        soup=bs.BeautifulSoup(url,'lxml')
+        definitions=[]
+        for paragraph in soup.find_all('p'):
+            definitions.append(str(paragraph.text))
+        if definitions:
+            if definitions[0]:
+                engine_speak('here is what i found '+definitions[0])
+            elif definitions[1]:
+                engine_speak('here is what i found '+definitions[1])
+            else:
+                engine_speak ('Here is what i found '+definitions[2])
+        """
         try:
             definition = record_audio("What do you need the definition of?")
-            wiki = wikipedia.page(str(definition))
+            wiki = wikipedia.page(str(definition), features="lxml")
             url = wiki.url
             webbrowser.get().open(url)
             print(wikipedia.summary(str(definition), sentences=2))
         except:
                 engine_speak("I am sorry I could not find the definition for " + definition)
     
-    if there_exists(["exit", "quit", "goodbye", "bye", "sleep", "i'm out"]):
+    if there_exists(["exit", "quit", "goodbye", "bye", "sleep", "I'm out"]):
         engine_speak("bye")
         sys.exit("Bye")
 
@@ -298,4 +315,3 @@ while 1:
     voice_data = record_audio("Recording")
     print("Q:", voice_data)
     respond(voice_data)
-    
