@@ -11,6 +11,8 @@ import random
 import requests
 import pyautogui
 import wikipedia
+import bs4 as bs
+import urllib.request
 import pyttsx3
 from gtts import gTTS
 from time import ctime
@@ -205,6 +207,11 @@ def respond(voice_data):
         url = "https://google.com/search?q=" + search_term + "%20stock"
         webbrowser.get().open(url)
         engine_speak("Here is what I found for" + search_term)
+    
+    if there_exists(["covid", "coronavirus", "covid 19"]): # COVID-19 News
+        url = "https://duckduckgo.com/?t=ffab&q=covid&ia=coronavirus"
+        webbrowser.get().open(url)
+        engine_speak("Here is what I found for Coronavirus")
 
     if there_exists(["weather"]): # Weather
         search_term = voice_data.split("weather")[-1]
@@ -270,23 +277,6 @@ def respond(voice_data):
         myScreenshot.save('C:/Users/user/image' + str(z) + '.png') 
         
     if there_exists(["definition"]): # Definition
-        """
-        # Bs4 method
-
-        definition=record_audio("What do you need the definition of")
-        url=urllib.request.urlopen('https://en.wikipedia.org/wiki/'+definition)
-        soup=bs.BeautifulSoup(url,'lxml')
-        definitions=[]
-        for paragraph in soup.find_all('p'):
-            definitions.append(str(paragraph.text))
-        if definitions:
-            if definitions[0]:
-                engine_speak('here is what i found '+definitions[0])
-            elif definitions[1]:
-                engine_speak('here is what i found '+definitions[1])
-            else:
-                engine_speak ('Here is what i found '+definitions[2])
-        """
         try:
             definition = record_audio("What do you need the definition of?")
             wiki = wikipedia.page(str(definition), features="lxml")
