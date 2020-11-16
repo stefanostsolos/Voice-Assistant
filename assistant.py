@@ -11,6 +11,8 @@ import random
 import requests
 import pyautogui
 import wikipedia
+import bs4 as bs
+import urllib.request
 import pyttsx3
 from gtts import gTTS
 from time import ctime
@@ -63,7 +65,7 @@ def engine_speak(audio_string):
     os.remove(audio_file)
 
 def respond(voice_data):
-    if there_exists(['hey', 'hi', 'hello']):
+    if there_exists(['hey', 'hi', 'hello']): # Greetings
         greetings = ["hey, how can I help you " + person_obj.name, "hey, what's up? " + person_obj.name, "I'm listening " + person_obj.name, "how can I help you? " + person_obj.name, "hello " + person_obj.name, "hi " + person_obj.name]
         greet = greetings[random.randint(0, len(greetings) - 1)]
         engine_speak(greet)
@@ -93,7 +95,7 @@ def respond(voice_data):
     if there_exists(["how old are you"]):
         engine_speak("I'm quite young, I'm still learning")
 
-    if there_exists(["what's the time", "tell me the time", "what time is it", "what is the time", "time now"]):
+    if there_exists(["what's the time", "tell me the time", "what time is it", "what is the time", "time now"]): # Time
         time = ctime().split(" ")[3].split(":")[0:2]
         if time[0] == "00":
             hours = '12'
@@ -103,83 +105,83 @@ def respond(voice_data):
         time = hours + " hours and " + minutes + "minutes"
         engine_speak(time)
     
-    if there_exists(['open website']):
+    if there_exists(['open website']): # Website
         reg_ex = re.search('open website (.+)', voice_data)
         if reg_ex:
             domain = reg_ex.group(1)
             url = 'https://www.' + domain + '.com'
             webbrowser.open(url)
     
-    if there_exists(['music', 'play music', 'songs']):
+    if there_exists(['music', 'play music', 'songs']): # Musix Mix on Youtube
         url = "https://www.youtube.com/watch?v=JGwWNGJdvx8&list=PLMC9KNkIncKtPzgY-5rmhvj7fax8fdxoj&list=RDMM&start_radio=1"
         webbrowser.get().open(url)
     
-    if there_exists(['restaurants', 'restaurants near me', 'nearby restaurants']):
+    if there_exists(['restaurant', 'restaurants', 'restaurants near me', 'nearby restaurants']): # Restaurants
         url = "https://www.google.com/search?q=restaurants+near+me"
         webbrowser.get().open(url)
 
-    if there_exists(['supermarket', 'supermarket near me', 'nearby supermarket']):
+    if there_exists(['supermarket', 'supermarkets', 'supermarket near me', 'nearby supermarket']): # Supermarkets
         url = "https://www.google.com/search?q=supermarket+near+me"
         webbrowser.get().open(url)
 
-    if there_exists(['I need a haircut', 'hair salon', 'hair saloon', 'haircut', 'nearby hair salon']):
+    if there_exists(['I need a haircut', 'hair salon', 'hair saloon', 'haircut', 'nearby hair salon']): # Hair Salon
         url = "https://www.google.com/search?q=hair+salon+near+me"
         webbrowser.get().open(url)
 
-    if there_exists(['barber', 'barber shop', 'i need a barber', 'nearby barber shop']):
+    if there_exists(['barber', 'barber shop', 'i need a barber', 'nearby barber shop']): # Barber
         url = "https://www.google.com/search?q=barber+shop+near+me"
         webbrowser.get().open(url)
 
-    if there_exists(['pet shop', 'pet shops', 'pet shops near me']):
+    if there_exists(['pet shop', 'pet shops', 'pet shops near me']): # Pet Shop
         url = "https://www.google.com/search?q=pet+shops+near+me"
         webbrowser.get().open(url)
 
-    if there_exists(['butcher', 'butcher shop']):
+    if there_exists(['butcher', 'butcher shop']): # Butcher
         url = "https://www.google.com/search?q=butchers+near+me"
         webbrowser.get().open(url)
 
-    if there_exists(['coffee', 'coffee shops']):
+    if there_exists(['coffee', 'coffee shops']): # Coffee
         url = "https://google.com/search?q=coffee+shops+near+me"
         webbrowser.get().open(url)
 
-    if there_exists(['bars', 'bars near me', 'drinks']):
+    if there_exists(['bars', 'bars near me', 'drinks']): # Bar
         url = "https://www.google.com/search?q=bars+near+me"
         webbrowser.get().open(url)
 
-    if there_exists(['clubs', 'clubs near me']):
+    if there_exists(['clubs', 'clubs near me']): # Club
         url = "https://www.google.com/search?q=clubs+near+me"
         webbrowser.get().open(url)
 
-    if there_exists(['news', 'latest news', 'news feed', 'top stories']):
+    if there_exists(['news', 'latest news', 'news feed', 'top stories']): # News
         url = "https://news.google.com/"
         webbrowser.get().open(url)
 
-    if there_exists(['gmail', 'g mail', 'geemail']):
+    if there_exists(['gmail', 'g mail', 'geemail']): # Gmail
         url = "https://www.google.com/gmail/" 
         webbrowser.get().open(url)
     
-    if there_exists(['facebook', 'open facebook']):
+    if there_exists(['facebook', 'open facebook']): # Facebook
         url = "https://facebook.com"
         webbrowser.get().open(url)
 
-    if there_exists(['github']):
+    if there_exists(['github']): # Github
         url = "https://github.com"
         webbrowser.get().open(url)
 
-    if there_exists(["search"]) and 'youtube' not in voice_data:
+    if there_exists(["search"]) and 'youtube' not in voice_data: # Google Search
         search_term = voice_data.split("search")[-1]
         url = "https://google.com/search?q=" + search_term
         webbrowser.get().open(url)
         engine_speak("Here is what I found for" + search_term)
 
-    if there_exists(["youtube"]):
+    if there_exists(["youtube"]): # Youtube Search
         search_term = voice_data.split("youtube")[-1]
         url = "https://www.youtube.com/results?search_query=" + search_term
         webbrowser.get().open(url)
         engine_speak("Here is what I found for" + search_term + " on youtube")
     
-    if there_exists(["game"]):
-        voice_data = record_audio("choose among rock paper or scissor")
+    if there_exists(["game"]): # Rock-Paper-Scissor Game
+        voice_data = record_audio("Choose among rock, paper or scissor")
         moves = ["rock", "paper", "scissor"]
         cmove = random.choice(moves)
         pmove = voice_data
@@ -200,78 +202,76 @@ def respond(voice_data):
         elif pmove == "scissor" and cmove == "rock":
             engine_speak("Computer wins")
    
-    if there_exists(["price of"]): 
+    if there_exists(["price of"]): # Stock Price
         search_term = voice_data.split("of")[-1]
-        url = "https://duckduckgo.com/?q=" + search_term + "+stock&t=ffab&ia=stock"
+        url = "https://google.com/search?q=" + search_term + "%20stock"
         webbrowser.get().open(url)
         engine_speak("Here is what I found for" + search_term)
 
-    if there_exists(["weather"]):
+    if there_exists(["weather"]): # Weather
         search_term = voice_data.split("weather")[-1]
-        url = "https://duckduckgo.com/?t=ffab&q=weather&ia=weather"
+        url = "https://google.com/search?q=weather"
         webbrowser.get().open(url)
         engine_speak("Here is what I found for weather")
     
-    if there_exists(["my region"]):
+    if there_exists(["my region"]): # Region
         Ip_info = requests.get('https://api.ipdata.co?api-key=test').json()
         loc = Ip_info['region']
         engine_speak(f"You must be somewhere in {loc}")    
         
-    if 'find location' in voice_data:
+    if 'find location' in voice_data: # Location
         location = record_audio('What is the location?')
         url = "https://google.com/maps/place/" + location
         webbrowser.get().open(url)
         engine_speak('Here is the location of ' + location)
     
-    #Current location from Google maps
-    if there_exists(["What is my exact location", "What's my exact location", "My exact location", "My location", "Where am i"]):
+    if there_exists(["what is my exact location", "what's my exact location", "my exact location", "my location", "where am i"]): # Current location from Google Maps
         url = "https://www.google.com/maps/search/Where+am+I+?/"
         webbrowser.get().open(url)
         engine_speak("You must be somewhere near here, as per Google maps")  
 
-    def note(voice_data):
+    def note(voice_data): # Note
         date = datetime.datetime.now()
         file_name = str(date).replace(":", "-") + "-note.txt"
         with open(file_name, "w") as f:
             f.write(voice_data)
         subprocess.Popen(["notepad.exe", file_name])
-        #os.system('Notepad')
 
-    NOTE_STRS = ["make a note", "write this down", "remember this", "type this"]
-    for phrase in NOTE_STRS:
-        if phrase in voice_data:
-            engine_speak("What would you like me to write down? ")
-            write_down = record_audio()
-            note(write_down)
-            engine_speak("I've made a note of that.")
+        NOTE_STRS = ["make a note", "write this down", "remember this", "type this"]
+        for phrase in NOTE_STRS:
+            if phrase in voice_data:
+                engine_speak("What would you like me to write down? ")
+                write_down = record_audio()
+                note(write_down)
+                engine_speak("I've made a note of that.")
     
-    if there_exists(['open calculator']):
+    if there_exists(['open calculator']): # Calculator
         os.system('calc')
 
-    if there_exists(['open calendar']):
+    if there_exists(['open calendar']): # Calendar
         url = "https://calendar.google.com/calendar"
         webbrowser.get().open(url)
 
-    if there_exists(['open mail', 'open the mail']):
+    if there_exists(['open mail', 'open the mail', 'outlook']): # Outlook
         os.startfile('Outlook')
 
-#    if there_exists(['open photos']):
+#    if there_exists(['open photos']): # Photos
 #        os.system('Photos')
-#
-#    if there_exists(['open settings', 'settings']):
+
+#    if there_exists(['open settings', 'settings']): # Setting 
 #        os.startfile('C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Settings')
 
-    if there_exists(["user", "users"]):
+    if there_exists(["user", "users"]): # User path
         path = "C:/Users"
         path = os.path.realpath(path)
         os.startfile(path)
 
-    if there_exists(["capture", "my screen", "screenshot"]):
+    if there_exists(["capture", "my screen", "screenshot"]): # Screenshot
         z = random.randint(1, 50000000)
         myScreenshot = pyautogui.screenshot()
         myScreenshot.save('C:/Users/user/image' + str(z) + '.png') 
         
-    if there_exists(["definition"]): 
+    if there_exists(["definition"]): # Definition
         """
         # Bs4 method
 
@@ -298,7 +298,7 @@ def respond(voice_data):
         except:
                 engine_speak("I am sorry I could not find the definition for " + definition)
     
-    if there_exists(["exit", "quit", "goodbye", "bye", "sleep", "I'm out"]):
+    if there_exists(["exit", "quit", "goodbye", "bye", "sleep", "I'm out"]): # Exit
         engine_speak("bye")
         sys.exit("Bye")
 
