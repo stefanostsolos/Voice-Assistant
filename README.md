@@ -11,18 +11,18 @@ speechrecognition, pyautogui, pyttsx3, wikipedia, gtts, playsound
 
 - Choose user's and assistant's name
 - Get current time
-- Open whatever website you want
+- Open .com websites
 - Play music from your mix on YouTube
 - Find restaurants, coffee shops, bars, clubs near you
 - Find supermarkets, butcher shops, pet shops near you
 - Find hair salons and barbers near you
 - Get the latest news
-- Open Facebook, Gmail, Github
+- Open Facebook, Github
 - Search on Google
 - Search on YouTube
 - Find information about a company's stock 
 - Weather information
 - Find a location in Google Maps
 - Open notepad and make a note using your voice, open calculator
-- Open Gmail or launch Outlook
+- Launch Gmail, Outlook
 - Take a screenshot and save it
