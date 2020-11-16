@@ -11,8 +11,6 @@ import random
 import requests
 import pyautogui
 import wikipedia
-import bs4 as bs
-import urllib.request
 import pyttsx3
 from gtts import gTTS
 from time import ctime
