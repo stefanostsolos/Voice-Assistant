@@ -12,7 +12,7 @@ speechrecognition, pyautogui, pyttsx3, wikipedia, gtts, playsound
 - Choose user's and assistant's name
 - Get current time
 - Open .com websites
-- Play music from your mix on YouTube
+- Play music from a mix on YouTube
 - Find restaurants, coffee shops, bars, clubs near you
 - Find supermarkets, butcher shops, pet shops near you
 - Find hair salons and barbers near you
